@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import List from './components/List';
+import Details from './components/Details';
+
 import withListLoading from './components/withListLoading';
-import axios from 'axios'
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
 
 function App() {
   const ListLoading = withListLoading(List);
@@ -20,11 +24,19 @@ function App() {
       setAppState({ loading: false, repos: allRepos });
     });
   }, [setAppState]);
+ 
+ 
   return (
     <div className='App'>
       <div className='container'>
         <h1>My Repositories</h1>
       </div>
+      <Router>
+      <Switch> 
+
+      <Route path="/details" render={(props) => <Details {...props} />}/>
+      </Switch> 
+
       <div className='repo-container'>
         <ListLoading isLoading={appState.loading} repos={appState.repos} />
       </div>
@@ -37,6 +49,8 @@ function App() {
           with by 
         </div>
       </footer>
+      </Router>
+
     </div>
   );
 }
