@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import List from './components/List';
 import withListLoading from './components/withListLoading';
+import axios from 'axios'
+
 function App() {
   const ListLoading = withListLoading(List);
   const [appState, setAppState] = useState({
@@ -11,12 +13,12 @@ function App() {
 
   useEffect(() => {
     setAppState({ loading: true });
-    const apiUrl = `https://api.github.com/users/nori-io/repos`;
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((repos) => {
-        setAppState({ loading: false, repos: repos });
-      });
+    const apiUrl = 'https://api.github.com/users/bruteforce1414/repos';
+    axios.get(apiUrl).then((repos) => {
+      const allRepos = repos.data;
+      console.log("allRepos is", allRepos)
+      setAppState({ loading: false, repos: allRepos });
+    });
   }, [setAppState]);
   return (
     <div className='App'>
