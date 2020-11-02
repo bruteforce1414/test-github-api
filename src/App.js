@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     setAppState({ loading: true });
-    const apiUrl = 'https://api.github.com/users/bruteforce1414/repos';
+    const apiUrl = 'https://api.github.com/users/nori-io/repos';
     axios.get(apiUrl).then((repos) => {
       const allRepos = repos.data;
       console.log("allRepos is", allRepos)

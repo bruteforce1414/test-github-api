@@ -14,7 +14,7 @@ const List = (props) => {
             
             <Link to={{
               pathname: '/details',
-              search: "repository="+repo.name
+              search: "repository="+repo.url
             }}><span className='repo-description'>{repo.url}</span></Link>
           </li>
         );
