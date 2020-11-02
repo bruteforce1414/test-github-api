@@ -11,8 +11,8 @@ const Details = ({match, location}) => {
 
     //   const location = useLocation();
   //  const { repository_name } = useParams();
-  let repos;
-var x= JSON.stringify(location, null, 2)
+    let repos;
+    var x= JSON.stringify(location, null, 2)
     console.log("location.search1",      qs.parse(location.search))
     const apiUrl = 'https://api.github.com/repos/nori-io/common/tags';
     axios.get(apiUrl).then((repos) => {

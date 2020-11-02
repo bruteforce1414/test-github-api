@@ -6,6 +6,8 @@ import Details from './components/Details';
 import withListLoading from './components/withListLoading';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Main from './components/Main';
+import Header from './components/Header';
 
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
     loading: false,
     repos: null,
   });
-
+/* 
   useEffect(() => {
     setAppState({ loading: true });
     const apiUrl = 'https://api.github.com/users/nori-io/repos';
@@ -24,14 +26,16 @@ function App() {
       setAppState({ loading: false, repos: allRepos });
     });
   }, [setAppState]);
- 
+  */
  
   return (
-    <div className='App'>
-      <div className='container'>
-        <h1>My Repositories</h1>
-      </div>
-      <Router>
+    <div>
+    <Header />
+    <Main />
+
+
+
+     {/*  <Router>
       <Switch> 
 
       <Route path="/details" render={(props) => <Details {...props} />}/>
@@ -50,8 +54,11 @@ function App() {
         </div>
       </footer>
       </Router>
-
+ */}
     </div>
+
   );
 }
+
+
 export default App;
