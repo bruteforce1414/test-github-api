@@ -3,7 +3,7 @@ import Repos from './Repos';
 import Home from './Home';
 import Tag from './Tag';
 import React, { useState } from "react";
-
+import {GetRepositories} from '../api/Get';
 
 
 
@@ -16,8 +16,10 @@ export default function Main () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    alert("you have searched for - " + value);
+    //alert("you have searched for - " + value);
     // or you can send to backend
+    let promise = GetRepositories(value);
+    //let result = await promise; 
   };
  
   return(
