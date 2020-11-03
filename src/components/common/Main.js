@@ -1,9 +1,9 @@
 import { Switch, Route } from 'react-router-dom';
-import Repos from './Repos';
-import Home from './Home';
-import Tag from './Tag';
+import Repos from '../Repos';
+import Home from '../Home';
+import Tag from '../Tag';
 import React, { useState } from "react";
-import {GetRepositories} from '../api/Get';
+import {GetRepositories} from '../../api/GetRepositories';
 
 
 
@@ -14,11 +14,12 @@ export default function Main () {
     setValue(e.target.value);
   };
 
-  const handleSubmit = e => {
+   const handleSubmit  = async (e) => {
     e.preventDefault();
     //alert("you have searched for - " + value);
     // or you can send to backend
-    let promise = GetRepositories(value);
+    let repos = await GetRepositories(value);
+    console.log("repos from GetRepositories  is", repos)
     //let result = await promise; 
   };
  
