@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import List from './components/List';
 import Details from './components/Details';
+
+import List from './components/List';
 
 import withListLoading from './components/withListLoading';
 import axios from 'axios';

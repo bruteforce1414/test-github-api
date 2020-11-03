@@ -1,8 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory, Route, Switch } from 'react-router-dom';
 import React, { useState } from "react";
 import {GetRepositories} from '../api/GetRepositories';
+import List from './List';
+import Details from './Details';
+
+
+import withListLoading from './withListLoading';
 
 export default function Home (){
+  const history = useHistory()
+
+  const ListLoading = withListLoading(List);
+  const [appState, setAppState] = useState({
+    loading: false,
+    repos: null,
+  });
+
   const [value, setValue] = useState("");
 
   const handleChange = e => {
@@ -11,14 +24,15 @@ export default function Home (){
 
    const handleSubmit  = async (e) => {
     e.preventDefault();
-    //alert("you have searched for - " + value);
-    // or you can send to backend
-    let repos = await GetRepositories(value);
+      let repos = await GetRepositories(value);
     console.log("repos from GetRepositories  is", repos)
-    //let result = await promise; 
+    setAppState({ loading: true, repos: repos });
+    
   }
 
-
+  if (appState.loading===false)
+{
+  console.log("appState.loading===false")
   return (
   <div>
      <form>
@@ -32,6 +46,17 @@ export default function Home (){
     </li>
    
   </div>
-)
+  
+)}
+else{
+  console.log("appState.loading===true", appState.loading)
+ 
+return (
+  <ListLoading isLoading={appState.loading} repos={appState.repos} />
+
+ /*  <Switch> 
+  <Route path="/details" render={(props) => <Details {...props} />}/>
+  </Switch>  */
+)}
 }
 
