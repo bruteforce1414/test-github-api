@@ -1,13 +1,13 @@
 import { Link, useHistory, Route, Switch } from 'react-router-dom';
-import React, { useState } from "react";
-import {GetRepositories} from '../api/GetRepositories';
+import React, { useState, useNavigate } from "react";
+import {GetUser} from '../api/GetUser';
 import List from './List';
 import Details from './Details';
 
 
 import withListLoading from './withListLoading';
 
-export default function Home (){
+const Home = props => {
   const history = useHistory()
 
   const ListLoading = withListLoading(List);
@@ -24,10 +24,11 @@ export default function Home (){
 
    const handleSubmit  = async (e) => {
     e.preventDefault();
-      let repos = await GetRepositories(value);
-    console.log("repos from GetRepositories  is", repos)
-    setAppState({ loading: true, repos: repos });
-    
+      let user = await GetUser(value);
+    console.log("user", user)
+  //  setAppState({ loading: false, repos: repos });
+     history.push("/nori-io"); 
+
   }
 
   if (appState.loading===false)
@@ -50,7 +51,6 @@ export default function Home (){
 )}
 else{
   console.log("appState.loading===true", appState.loading)
- 
 return (
   <ListLoading isLoading={appState.loading} repos={appState.repos} />
 
@@ -60,3 +60,4 @@ return (
 )}
 }
 
+export default Home;

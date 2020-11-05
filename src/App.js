@@ -6,7 +6,7 @@ import List from './components/List';
 
 import withListLoading from './components/withListLoading';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import {Route, Link, Switch } from "react-router-dom";
 import Main from './components/common/Main';
 import Header from './components/common/Header';
 
