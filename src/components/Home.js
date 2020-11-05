@@ -24,68 +24,40 @@ const Home = props => {
 
   const handleSubmit = async (e) => {
     setAppState({loading:true})
-
     e.preventDefault();
     console.log("e.target.value", value)
     let user = await GetUser(value);
     setAppState({loading:false})
     console.log("user", user)
     if (user !== undefined) {
+      setAppState({error:false})
+
       history.push("/" + value);
+
     }
     else{
-      setAppState({error:true})
+      setAppState({error:true, loading:false})
+      
     }
 
   }
 
-  if (appState.error===true){
+  
     return (
       <div>
         <form>
-          <input value={value} onChange={handleChange} />
-          <button onClick={handleSubmit} type="submit">
+          <input disabled={appState.loading} value={value} onChange={handleChange} />
+          <button disabled={appState.loading} onClick={handleSubmit} type="submit">
             Submit
         </button>
         </form>
-        <h2>User not exist!!!</h2>
-
+        <h2 hidden={!appState.loading}>Loading...</h2>
+        <h2 hidden={!appState.error}>User not exist!!!</h2>
+        
       </div>)
   }
 
-  if (appState.loading === false) {
-   
-    return (
-      <div>
-        <form>
-          <input value={value} onChange={handleChange} />
-          <button onClick={handleSubmit} type="submit">
-            Submit
-        </button>
-        </form>
-        <li>
-          <Link to="/nori-io">Nori-io repos</Link>
-        </li>
+  
 
-      </div>
-
-    )
-  }
-  else {
-    
-    return (
-      <div>
-
-      <form>
-      <input disabled={appState.loading} value={value} onChange={handleChange} />
-      <button disabled={appState.loading} onClick={handleSubmit} type="submit">
-        Submit
-    </button>
-    </form>
-      <h1>Loading...</h1>
-      </div>
-     )
-  }
-}
 
 export default Home;
