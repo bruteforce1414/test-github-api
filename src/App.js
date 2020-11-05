@@ -17,17 +17,6 @@ function App() {
     loading: false,
     repos: null,
   });
-/* 
-  useEffect(() => {
-    setAppState({ loading: true });
-    const apiUrl = 'https://api.github.com/users/nori-io/repos';
-    axios.get(apiUrl).then((repos) => {
-      const allRepos = repos.data;
-      console.log("allRepos is", allRepos)
-      setAppState({ loading: false, repos: allRepos });
-    });
-  }, [setAppState]);
-  */
  
   return (
     <div>
