@@ -13,8 +13,7 @@ const Home = props => {
   const ListLoading = withListLoading(List);
   const [appState, setAppState] = useState({
     loading: false,
-    repos: null,
-    err: error,
+    err:false,
   });
 
   const [value, setValue] = useState("");
@@ -24,16 +23,34 @@ const Home = props => {
   };
 
   const handleSubmit = async (e) => {
+    setAppState({loading:true})
+
     e.preventDefault();
     console.log("e.target.value", value)
     let user = await GetUser(value);
+    setAppState({loading:false})
     console.log("user", user)
     if (user !== undefined) {
       history.push("/" + value);
-
     }
-    //  setAppState({ loading: false, repos: repos });
+    else{
+      setAppState({error:true})
+    }
 
+  }
+
+  if (appState.error===true){
+    return (
+      <div>
+        <form>
+          <input value={value} onChange={handleChange} />
+          <button onClick={handleSubmit} type="submit">
+            Submit
+        </button>
+        </form>
+        <h2>User not exist!!!</h2>
+
+      </div>)
   }
 
   if (appState.loading === false) {
@@ -55,14 +72,19 @@ const Home = props => {
     )
   }
   else {
-    console.log("appState.loading===true", appState.loading)
+    
     return (
-      <ListLoading isLoading={appState.loading} repos={appState.repos} />
+      <div>
 
-      /*  <Switch> 
-       <Route path="/details" render={(props) => <Details {...props} />}/>
-       </Switch>  */
-    )
+      <form>
+      <input disabled={appState.loading} value={value} onChange={handleChange} />
+      <button disabled={appState.loading} onClick={handleSubmit} type="submit">
+        Submit
+    </button>
+    </form>
+      <h1>Loading...</h1>
+      </div>
+     )
   }
 }
 
