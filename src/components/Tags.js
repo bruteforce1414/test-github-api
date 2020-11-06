@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const Tags = () => (
+function Tags  () {
+
+    let location = useLocation();
+    var arrayOfStrings = (location.pathname).split("/");
+    console.log("arrayOfStrings", arrayOfStrings)
+
+return(
     <div>
-        <li><Link to='/nori-io'>User</Link></li>
+        <li><Link to={"/"+arrayOfStrings[1]}>{"/"+arrayOfStrings[1]}</Link></li>
 
         <ul>
             <li>
@@ -19,5 +26,6 @@ const Tags = () => (
         </ul>
     </div>
 )
+}
 
 export default Tags;

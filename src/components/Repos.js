@@ -11,10 +11,7 @@ function List() {
 
   let location = useLocation();
 
-
-
   useEffect(() => {
-    console.log("location", location.pathname)
 
     GetRepositories(location.pathname).then(response => {
       console.log("response",)
