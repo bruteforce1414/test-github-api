@@ -2,7 +2,8 @@ import axios from "axios";
 
 
 async function Get(user) {
-  const apiUrl = "https://api.github.com/users"+user+"/repos";
+  console.log("USER Is", user)
+  const apiUrl = "https://api.github.com/users/"+user+"/repos";
 
   try {
     const response = await axios.get(apiUrl);

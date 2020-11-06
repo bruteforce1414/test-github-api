@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { GetTags } from '../api/GetTags';
 
 function Tags() {
 
-    let location = useLocation();
-    var arrayOfStrings = (location.pathname).split("/");
+   
     const [isLoading, setLoading] = useState(true);
     const [tags, setTags] = useState([]);
+    let { user, repo } = useParams();
 
 
     useEffect(() => {
 
-        GetTags(location.pathname).then(response => {
+        GetTags(user, repo).then(response => {
             response.map((number) => setTags(oldArray => [...oldArray, number.name]));
 
             setLoading(false);
@@ -27,8 +27,8 @@ function Tags() {
     if (tags.length !== 0) {
         return (
             <div className="List">
-                <Link to={"/" + arrayOfStrings[1]}>{"/" + arrayOfStrings[1]}</Link>
-                <h1>Tags:</h1>
+                <Link to={"/" + user}>{"/" + user}</Link>
+                <h2>Tags of repository {repo}:</h2>
                 {tags.map((tag) => {
                     return (
                         <li key={tag.id} className='list'>
@@ -42,9 +42,9 @@ function Tags() {
     else {
         return (
             <div>
-                <li><Link to={"/" + arrayOfStrings[1]}>{"/" + arrayOfStrings[1]}</Link></li>
+                <li><Link to={"/" + user}>{"/" + user}</Link></li>
 
-                <h2>No tags in repository {arrayOfStrings[2]}</h2>
+                <h2>No tags in repository {repo}</h2>
             </div>
         )
     }
