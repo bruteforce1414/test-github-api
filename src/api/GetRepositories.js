@@ -3,7 +3,7 @@ import axios from "axios";
 
 async function Get(user) {
   console.log("USER IN GETREPOSITORIES", user)
-  const apiUrl = "https://api.github.com/users/nori-io/repos";
+  const apiUrl = "https://api.github.com/users"+user+"/repos";
 
   try {
     const response = await axios.get(apiUrl);
