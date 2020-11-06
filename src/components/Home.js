@@ -2,15 +2,10 @@ import { Link, useHistory, Route, Switch } from 'react-router-dom';
 import React, { useState, useNavigate } from "react";
 import { GetUser } from '../api/GetUser';
 import List from './Repos';
-import Details from './Details';
-
-
-import withListLoading from './withListLoading';
 
 const Home = props => {
   const history = useHistory()
 
-  const ListLoading = withListLoading(List);
   const [appState, setAppState] = useState({
     loading: false,
     err:false,
@@ -25,10 +20,8 @@ const Home = props => {
   const handleSubmit = async (e) => {
     setAppState({loading:true})
     e.preventDefault();
-    console.log("e.target.value", value)
     let user = await GetUser(value);
     setAppState({loading:false})
-    console.log("user", user)
     if (user !== undefined) {
       setAppState({error:false})
 

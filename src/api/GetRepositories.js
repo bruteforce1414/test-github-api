@@ -2,7 +2,6 @@ import axios from "axios";
 
 
 async function Get(user) {
-  console.log("USER IN GETREPOSITORIES", user)
   const apiUrl = "https://api.github.com/users"+user+"/repos";
 
   try {

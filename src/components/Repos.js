@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { traverseTwoPhase } from 'react-dom/test-utils';
 import { Link } from "react-router-dom";
 import { GetRepositories } from '../api/GetRepositories';
 
-function List() {
+function Repos() {
   const [isLoading, setLoading] = useState(true);
   const [repos, setRepos] = useState([]);
 
@@ -14,7 +13,6 @@ function List() {
   useEffect(() => {
 
     GetRepositories(location.pathname).then(response => {
-      console.log("response",)
       response.map((number) => setRepos(oldArray => [...oldArray, number.name]));
 
       setLoading(false);
@@ -43,4 +41,4 @@ function List() {
 
 
 
-export default List;
+export default Repos;
