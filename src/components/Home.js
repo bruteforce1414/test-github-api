@@ -1,7 +1,7 @@
 import { Link, useHistory, Route, Switch } from 'react-router-dom';
 import React, { useState, useNavigate } from "react";
 import { GetUser } from '../api/GetUser';
-import List from './List';
+import List from './Repos';
 import Details from './Details';
 
 

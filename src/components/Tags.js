@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Tag = () => (
+const Tags = () => (
     <div>
         <li><Link to='/nori-io'>User</Link></li>
 
@@ -20,4 +20,4 @@ const Tag = () => (
     </div>
 )
 
-export default Tag;
+export default Tags;
