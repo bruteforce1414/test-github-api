@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 async function Get(user) {
-  const apiUrl = 'https://api.github.com/users/'+user;
+  const apiUrl = 'https://api.github.com/users/' + user;
 
   try {
     const response = await axios.get(apiUrl);

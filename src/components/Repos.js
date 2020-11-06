@@ -28,9 +28,9 @@ function Repos() {
       <h1>Available Public Repositories:</h1>
       {repos.map((repo) => {
         return (
-          <li key={repo.id} className='list'>         
+          <li key={repo.id} className='list'>
             <Link to={{
-              pathname: location.pathname+"/"+repo,
+              pathname: location.pathname + "/" + repo,
             }}><span className='repo-description'>{repo}</span></Link>
           </li>
         );
@@ -38,7 +38,5 @@ function Repos() {
     </div>
   );
 }
-
-
 
 export default Repos;
