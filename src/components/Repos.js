@@ -23,8 +23,8 @@ function Repos() {
   if (isLoading) {
     return <div className="List">Loading...</div>;
   }else if (repos.length===0){
-    return <h2>Repositories not found</h2>
-  //    return <Redirect to="/" />;
+    //return <h2>Repositories not found</h2>
+    return <Redirect to="/" />;
   }else {
   return (
     <div className="List">
