@@ -1,14 +1,23 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import routeData from "react-router"
 
 import Tags from "./Tags";
 
 let container = null;
+
+const mockParams = {
+  user: 'nori-io',
+  repo: 'common'
+}
+
 beforeEach(() => {
   // подготавливаем DOM-элемент, куда будем рендерить
   container = document.createElement("div");
   document.body.appendChild(container);
+  jest.spyOn(routeData, 'useParams').mockReturnValue(mockParams)
+
 });
 
 afterEach(() => {
@@ -16,14 +25,19 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
+
 });
 
+
+
+
+
 it("renders user data", async () => {
-  const fakeUser = {
-    name: "Joni Baez",
-    age: "32",
-    address: "123, Charming Avenue"
-  };
+
+ 
+
+
+  const fakeTag = "v1.0.0";
   global.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => Promise.resolve(fakeUser)
@@ -32,12 +46,11 @@ it("renders user data", async () => {
 
   // Используем act асинхронно, чтобы передать успешно завершённые промисы
   await act(async () => {
-    render(<User id="123" />, container);
+    render(<Tags />, container);
   });
 
-  expect(container.querySelector("summary").textContent).toBe(fakeUser.name);
-  expect(container.querySelector("strong").textContent).toBe(fakeUser.age);
-  expect(container.textContent).toContain(fakeUser.address);
+  expect(container.querySelector("li").textContent).toBe(fakeTag);
+  
 
   // выключаем фиктивный fetch, чтобы убедиться, что тесты полностью изолированы
   global.fetch.mockRestore();

@@ -8,7 +8,7 @@ function Tags() {
    
     const [isLoading, setLoading] = useState(true);
     const [tags, setTags] = useState([]);
-    let { user, repo } = useParams();
+    const { user, repo } = useParams();
 
 
     useEffect(() => {
