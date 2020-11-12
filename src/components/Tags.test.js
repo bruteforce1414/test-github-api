@@ -2,7 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import routeData from "react-router"
-
+import axios from "axios"
 import Tags from "./Tags";
 
 let container = null;
@@ -38,11 +38,7 @@ it("renders user data", async () => {
 
 
   const fakeTag ="v1.0.0";
-  global.fetch = jest.fn().mockImplementation(() =>
-    Promise.resolve({
-      json: () => Promise.resolve(fakeTag)
-    })
-  );
+  const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(fakeTag)
 
   // Используем act асинхронно, чтобы передать успешно завершённые промисы
   await act(async () => {
@@ -51,9 +47,11 @@ it("renders user data", async () => {
 
   expect(container.querySelector(".summary").textContent).toBe(fakeTag);
   
+  axiosGetSpy.mockRestore();
 
   // выключаем фиктивный fetch, чтобы убедиться, что тесты полностью изолированы
-  global.fetch.mockRestore();
-  global.fetch.mockClear();
-  delete global.fetch;
+  //global.fetch.mockRestore();
+
+  //global.fetch.mockClear();
+ // delete global.fetch;
 });

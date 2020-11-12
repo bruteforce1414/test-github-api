@@ -18,8 +18,8 @@ export default function Tags() {
 
         const apiUrl = "https://api.github.com/repos/" + user+"/"+repo+ "/tags";
     
-        const response=await fetch(apiUrl)
-            setTags( await response.json());
+        const response= await axios.get(apiUrl)
+            setTags( await response);
            
     }
     
