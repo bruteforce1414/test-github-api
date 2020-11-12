@@ -37,19 +37,20 @@ it("renders user data", async () => {
  
 
 
-  const fakeTag = "v1.0.0";
+  const fakeTag ="v1.0.0";
   global.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
-      json: () => Promise.resolve(fakeUser)
+      json: () => Promise.resolve(fakeTag)
     })
   );
 
+  setTimeout(10000);
   // Используем act асинхронно, чтобы передать успешно завершённые промисы
   await act(async () => {
     render(<Tags />, container);
   });
 
-  expect(container.querySelector("li").textContent).toBe(fakeTag);
+  expect(container.querySelector(".summary").textContent).toBe(fakeTag);
   
 
   // выключаем фиктивный fetch, чтобы убедиться, что тесты полностью изолированы
