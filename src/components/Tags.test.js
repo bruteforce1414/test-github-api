@@ -44,7 +44,6 @@ it("renders user data", async () => {
     })
   );
 
-  setTimeout(10000);
   // Используем act асинхронно, чтобы передать успешно завершённые промисы
   await act(async () => {
     render(<Tags />, container);
