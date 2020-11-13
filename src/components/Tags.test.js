@@ -37,7 +37,13 @@ it("renders user data", async () => {
  
 
 
-  const fakeTag ="v1.0.0v2.0.0";
+  const fakeTag =
+  [{
+    "data": ["v1.0.0", "v2.0.0"],
+    
+}]
+  
+  
   const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(fakeTag)
 
   // Используем act асинхронно, чтобы передать успешно завершённые промисы
@@ -45,7 +51,7 @@ it("renders user data", async () => {
     render(<Tags />, container);
   });
 
-  expect(container.querySelector(".summary").textContent).toBe(fakeTag);
+  expect(container.querySelector(".summary").textContent).toBe(fakeTag.data);
   
   axiosGetSpy.mockRestore();
 

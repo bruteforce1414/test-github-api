@@ -19,8 +19,14 @@ export default function Tags() {
         const apiUrl = "https://api.github.com/repos/" + user+"/"+repo+ "/tags";
     
         const response= await axios.get(apiUrl)
-            setTags( await response);
-            console.log("response.data", await response.data)
+            await response;
+            console.log("RESPONSE IS", response);
+           // await response.data;
+           console.log("RESPONSE.DATA IS", response.data);
+
+           response.data.map((number) => setTags(oldArray => [...oldArray, number.name]));
+          //  (setTags(response));
+
            
     }
     
