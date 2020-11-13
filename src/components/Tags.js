@@ -9,9 +9,9 @@ export default function Tags() {
 
    
    const [isLoading, setLoading] = useState(true);
-    //const [tags, setTags] = useState([]);
+    const [tags, setTags] = useState([]);
     const { user, repo } = useParams();
-    const [tags, setTags] = useState();
+   // const [tags, setTags] = useState();
 
 
     async function GetTags(user, repo) {
@@ -20,6 +20,7 @@ export default function Tags() {
     
         const response= await axios.get(apiUrl)
             setTags( await response);
+            console.log("response.data", await response.data)
            
     }
     

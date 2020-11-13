@@ -37,7 +37,7 @@ it("renders user data", async () => {
  
 
 
-  const fakeTag ="v1.0.0";
+  const fakeTag =["v1.0.0", "v2.0.0"];
   const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(fakeTag)
 
   // Используем act асинхронно, чтобы передать успешно завершённые промисы
