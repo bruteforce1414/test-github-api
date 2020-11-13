@@ -2,7 +2,6 @@ import axios from "axios";
 
 
 async function Get(user, repo) {
-
     const apiUrl = "https://api.github.com/repos/" + user+"/"+repo+ "/tags";
 
     try {
@@ -14,7 +13,6 @@ async function Get(user, repo) {
 }
 
 async function GetTags(user, repo) {
-
     try {
         let x = await Get(user,repo)
         return x.data

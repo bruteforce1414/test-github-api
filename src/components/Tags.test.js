@@ -1,5 +1,7 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
+import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
 import { act } from "react-dom/test-utils";
 import routeData from "react-router"
 import axios from "axios"
@@ -7,17 +9,10 @@ import Tags from "./Tags";
 
 let container = null;
 
-const mockParams = {
-  user: 'nori-io',
-  repo: 'common'
-}
-
 beforeEach(() => {
   // подготавливаем DOM-элемент, куда будем рендерить
   container = document.createElement("div");
   document.body.appendChild(container);
-  jest.spyOn(routeData, 'useParams').mockReturnValue(mockParams)
-
 });
 
 afterEach(() => {
@@ -25,39 +20,28 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
-
 });
 
-
-
-
-
 it("renders user data", async () => {
+  const fakeTag = {
+    "data": [ {"name": "v1.0.0"}, {"name": "v2.0.0"}],
+  }
 
- 
+  const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(
+      new Promise((resolve, reject) => {
+        resolve(fakeTag)
+      })
+  )
 
+  const history = createMemoryHistory()
 
-  const fakeTag =
-  [{
-    "data": ["v1.0.0", "v2.0.0"],
-    
-}]
-  
-  
-  const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(fakeTag)
-
-  // Используем act асинхронно, чтобы передать успешно завершённые промисы
   await act(async () => {
-    render(<Tags />, container);
+    render(<Router history={history}>
+      <Tags />
+    </Router>, container);
   });
 
-  expect(container.querySelector(".summary").textContent).toBe(fakeTag.data);
+  expect(container.querySelectorAll(".summary")[0].textContent).toBe(fakeTag.data[0].name);
   
   axiosGetSpy.mockRestore();
-
-  // выключаем фиктивный fetch, чтобы убедиться, что тесты полностью изолированы
-  //global.fetch.mockRestore();
-
-  //global.fetch.mockClear();
- // delete global.fetch;
 });
